@@ -13,15 +13,10 @@ namespace icedcode
 
 
   protected:
-  }
+  };
 
 
-
-
-
-
-
-};
+}
 
 
 #endif

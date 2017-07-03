@@ -1,4 +1,7 @@
 #include <DataMgr.hh>
+#include <cstring>
+
+using namespace std;
 
 namespace icedcode
 {
@@ -12,20 +15,18 @@ namespace icedcode
     return fInputFstream.is_open ();
   }
 
-  void DataMgr::RawData::GetParameterValuesFromEntry (size_t aEntryNb, vector<float>& aValueList)
+  void DataMgr::RawData::GetParameterValuesFromEntry (size_t aEntryNb, vector <float>& aValueList) const
   {
     aValueList.clear ();
     aValueList.resize (fValueEntrySize);
     size_t position = aEntryNb*(fValueEntrySize-1);
     memcpy(&(aValueList[0]), &(fParametersValues[position]), fValueEntrySize*sizeof (float));
-
-    return toreturn;
   }
 
-  list <float> DataMgr::RawData::GetOrderedParametersValues (size_t aPositionInEntries)
+  list <float> DataMgr::RawData::GetOrderedParametersValues (size_t aPositionInEntries) const
   {
     list <float> toreturn;
-    for (size_t it = 0; it < fParametersValues.size (); fParametersValues+=fParametersNames.size  ())
+    for (size_t it = aPositionInEntries; it < fParametersValues.size (); it+=GetNumberOfParameters ())
       {
         toreturn.push_back (fParametersValues[it]);
       }

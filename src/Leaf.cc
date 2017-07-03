@@ -2,28 +2,30 @@
 
 namespace icedcode
 {
-  RootLeaf::RootLeaf (Tree* aTree, const RawData& aRawData)
+  RootLeaf::RootLeaf (const Tree* aTree, const DataMgr::RawData& aRawData)
   {
     fTree = aTree;
     fLeafRemainingData = aRawData;
   }
 
-  Leaf::Leaf (const Leaf* aMotherLeaf, Tree *aTree, const RawData& aRawData): RootLeaf (aTree,aRawData)
+  void RootLeaf::GetDaugtherLeafs (const Leaf*& aLowLeaf, const Leaf*& aHighLeaf) const
   {
-
-  }
-
-  void Leaf::GetDaugtherLeafs (const Leaf* aLowLeaf, const Leaf* aHighLeaf)
-  {
-    aLowleaf=fLowDautherLeaf;
+    aLowLeaf=fLowDautherLeaf;
     aHighLeaf=fHighDautherLeaf;
   }
 
-  void Leaf::SetDaugtherLeafs (const Leaf* aLowLeaf, const Leaf* aHighLeaf)
+  void RootLeaf::SetDaugtherLeafs (const Leaf* aLowLeaf, const Leaf* aHighLeaf)
   {
-    fLowDautherLeaf = aLowleaf;
-    fHighDautherLea = aHighLeaf;
+    fLowDautherLeaf = aLowLeaf;
+    fHighDautherLeaf = aHighLeaf;
   }
 
+
+  Leaf::Leaf (const Leaf* aMotherLeaf, const Tree *aTree, const DataMgr::RawData& aRawData): RootLeaf (aTree,aRawData)
+  {
+    fMotherLeaf = aMotherLeaf;
+  }
+
+  Leaf::Leaf () {}
 
 }

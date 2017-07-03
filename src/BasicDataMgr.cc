@@ -4,6 +4,9 @@ using namespace std;
 
 namespace icedcode
 {
+  BasicDataMgr::BasicDataMgr () {}
+  BasicDataMgr::~BasicDataMgr () {}
+
 
   //TODO optimize the reading
   bool BasicDataMgr::ReadData ()
@@ -15,24 +18,32 @@ namespace icedcode
     //the first line should give the number of parameters
     fInputFstream >> nb_param;
     //the next line contains the parameter titles
-    int counter=0;
+    size_t counter=0;
     string paramname;
+    vector <string> ParametersNames;
     while (counter++ < nb_param && fInputFstream >> paramname)
       {
-        fParametersNames.push_back (paramname);
+        ParametersNames.push_back (paramname);
       }
-    fParametersNames.push_back ("outcome");
+    ParametersNames.push_back ("outcome");
 
+    fRootRawData.SetParameterNames (ParametersNames);
     //then filling it
     counter = 0;
     float tmp;
+    vector <float> Entry;
     while (fInputFstream >> tmp)
       {
-        fParametersValues.push_back (tmp);
+        if (Entry.size () % fRootRawData.GetNumberOfParameters () == 0)
+          {
+            fRootRawData.AddEntry (Entry);
+            Entry.clear ();
+          }
       }
 
-    if (fParametersValues.size () % fParametersNames.size ())
+    if (Entry.size ())
       return false;
+
     return true;
   }
 

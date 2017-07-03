@@ -4,11 +4,11 @@
 
 namespace icedcode
 {
-   class BasicDataMgr: public DataMgr
+  class BasicDataMgr: public DataMgr
   {
   public:
-    BasicDataMgr () {}
-    BasicDataMgr () {}
+    BasicDataMgr ();
+    ~BasicDataMgr ();
 
     virtual bool CheckFile () {return fInputFstream.is_open ();}
     virtual bool ReadData ();

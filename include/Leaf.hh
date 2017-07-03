@@ -2,6 +2,8 @@
 #define __minitree_leaf__
 
 #include <BasicDataMgr.hh>
+#include <DataMgr.hh>
+#include <limits>
 
 namespace icedcode
 {
@@ -11,21 +13,21 @@ namespace icedcode
   class RootLeaf
   {
   public:
-    Leaf ();
-    Leaf (const Tree* aTree, const RawData& aRawData);
-    ~Leaf () {}
+    RootLeaf ();
+    RootLeaf (const Tree* aTree, const DataMgr::RawData& aRawData);
+    ~RootLeaf () {}
 
     const Tree* GetTree () const {return fTree;}
-    const RawData& GetRawData () const {return fLeafRemainingData;}
+    const DataMgr::RawData& GetRawData () const {return fLeafRemainingData;}
 
-    void SetRawData (const RawData& aRawData) {fLeafRemainingData=aRawData;}
+    void SetRawData (const DataMgr::RawData& aRawData) {fLeafRemainingData=aRawData;}
 
-    void GetDaugtherLeafs (const Leaf* aLowLeaf, const Leaf* aHighLeaf) const;
+    void GetDaugtherLeafs (const Leaf*& aLowLeaf, const Leaf*& aHighLeaf) const;
     void SetDaugtherLeafs (const Leaf* aLowLeaf, const Leaf* aHighLeaf);
 
   protected:
     const Tree* fTree;
-    RawData fLeafRemainingData;
+    DataMgr::RawData fLeafRemainingData;
 
     const Leaf* fLowDautherLeaf = 0;
     const Leaf* fHighDautherLeaf = 0;
@@ -35,11 +37,19 @@ namespace icedcode
   class Leaf: public RootLeaf
   {
   public:
-    Leaf (const Leaf* aMotherLeaf, const Tree* aTree, const RawData& aRawData);
+    Leaf (const Leaf* aMotherLeaf, const Tree* aTree, const DataMgr::RawData& aRawData);
+    Leaf ();
     ~Leaf () {}
 
     const Leaf* GetMotherLeaf () const {return fMotherLeaf;}
+    void SetChi2 (float aChi2) {fChi2=aChi2;}
     float GetChi2 () const {return fChi2;}
+
+    void SetCutValue (float aCut) {fCut=aCut;}
+    float GetCutValue () const {return fCut;}
+
+    size_t GetCuttedParameterPositon () {return fCuttedPar;}
+    void SetCuttedParameterPosition (size_t aCuttedPar) {fCuttedPar = aCuttedPar;}
 
   protected:
     const Leaf* fMotherLeaf = 0;
@@ -47,6 +57,8 @@ namespace icedcode
     float fMotherLeafCuttedParameter;
     float fMotherLeafCutValue;
     float fChi2=-1;
+    float fCut=std::numeric_limits<float>::min();
+    size_t fCuttedPar=-1;
   };
 
 }

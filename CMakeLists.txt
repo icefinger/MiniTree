@@ -1,6 +1,6 @@
 # (1)
 cmake_minimum_required(VERSION 2.6 FATAL_ERROR)
-project(Amoeba)
+project(MiniTree)
 
 
 # check for x64 or x86
@@ -89,18 +89,18 @@ message (${CMAKE_CXX_FLAGS})
 
 # (6) finish with all the binaries
 if(ENABLE_TESTING)
-  add_library(amoeba SHARED ${sources} ${test_sources})
+  add_library(MiniTree SHARED ${sources} ${test_sources})
   SET (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DENABLE_TESTING=1")
   foreach(aprog IN LISTS TESTS)
     get_filename_component(aprogname ${aprog} NAME_WE)
     add_executable(${aprogname} ${aprog} ${headers} ${test_headers})
-    target_link_libraries(${aprogname} ${ROOT_LIBRARIES} amoeba)
+    target_link_libraries(${aprogname} ${ROOT_LIBRARIES} MiniTree)
   endforeach ()
 else(ENABLE_TESTING)
-  add_library(amoeba SHARED ${sources})
+  add_library(MiniTree SHARED ${sources})
   foreach(aprog IN LISTS PROGRAMS)
     get_filename_component(aprogname ${aprog} NAME_WE)
     add_executable(${aprogname} ${aprog} ${headers})
-    target_link_libraries(${aprogname} ${ROOT_LIBRARIES} amoeba)
+    target_link_libraries(${aprogname} ${ROOT_LIBRARIES} MiniTree)
   endforeach ()
 endif(ENABLE_TESTING)

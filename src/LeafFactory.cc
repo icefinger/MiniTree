@@ -1,5 +1,11 @@
 #include <LeafFactory.hh>
 
+#include <utility>
+#include <string>
+#include <cmath>
+
+using namespace std;
+
 namespace icedcode
 {
   LeafFactory* LeafFactory::fInstance = 0;
@@ -19,20 +25,20 @@ namespace icedcode
     return fInstance;
   }
 
-  Leaf** LeafFactory::CreateDaugherLeafs (const RawData& aRawData)
+  Leaf** LeafFactory::CreateDaugherLeafs (const DataMgr::RawData& aRawData)
   {
     Leaf** overallBestLeafs = GetParameterBestLeaf (0, aRawData);
 
     for (size_t it=1 ; it<aRawData.GetNumberOfParameters () ; it++)
       {
         Leaf** bestLeaf = GetParameterBestLeaf (it, aRawData);
-        if (overallBestLeaf != 0 || overallBestLeaf[0]->GetChi2 () < bestLeaf[0]->GetChi2 ())
+        if (overallBestLeafs != 0 || overallBestLeafs[0]->GetChi2 () < bestLeaf[0]->GetChi2 ())
           {
-            delete overallBestLeaf[0];
-            delete overallBestLeaf[1];
-            delete overallBestLeaf;
+            delete overallBestLeafs[0];
+            delete overallBestLeafs[1];
+            delete overallBestLeafs;
 
-            overallBestLeaf = bestLeaf;
+            overallBestLeafs = bestLeaf;
           }
         else
           {
@@ -47,7 +53,7 @@ namespace icedcode
     float cutParVal  = overallBestLeafs[0]->GetCutValue ();
 
     DataMgr::RawData LeafRawDatas[2];
-    __GenerateRawData (aRawData, curParPos, cutParVal, LeafRawDatas);
+    __GenerateRawData (aRawData, cutParPos, cutParVal, LeafRawDatas);
     overallBestLeafs[0]->SetRawData (LeafRawDatas[0]);
     overallBestLeafs[1]->SetRawData (LeafRawDatas[1]);
 
@@ -57,7 +63,6 @@ namespace icedcode
 
   Leaf** LeafFactory::GetParameterBestLeaf (size_t aPositionInEntries, const DataMgr::RawData& aRawData)
   {
-    pair <float, float> limits = aRawData.GetValueLimitsOfParamater (aPositionInEntries);
     list <float> orderedValues=aRawData.GetOrderedParametersValues (aPositionInEntries);
     float previous_value=std::numeric_limits<float>::min();
 
@@ -69,7 +74,7 @@ namespace icedcode
         if (previous_value == std::numeric_limits<float>::min())
           continue;
         cut = (val-previous_value)/2;
-        chi2=__Chi2Calculator (aPositionInEntries, aRawData,);
+        chi2=__Chi2Calculator (aRawData, aPositionInEntries, cut);
         if (chi2 > maxcut)
           {
             maxcut=cut;
@@ -84,9 +89,9 @@ namespace icedcode
     toreturn[1]=new Leaf ();
 
     toreturn[0]->SetChi2 (maxchi2);
-    toreturn[0]->SetCut (maxcut);
+    toreturn[0]->SetCutValue (maxcut);
     toreturn[1]->SetChi2 (maxchi2);
-    toreturn[1]->SetCut (maxcut);
+    toreturn[1]->SetCutValue (maxcut);
 
     return toreturn;
   }
@@ -128,12 +133,12 @@ namespace icedcode
         if (value < aCutValue)
           n11+=value;
         else
-          n21+=value;
+          n12+=value;
       }
     float nproduct1 = 2*n11+n12;
     float nproduct2 = 2*n12+n11;
-    float chi2 = pow (n11 - nproduct1, 2)/nproduct1 + pow (n12 - nproduct2)/nproduct2;
-    chi2/=2*(n11+n21);
+    float chi2 = pow (n11 - nproduct1, 2)/nproduct1 + pow (n12 - nproduct2,2)/nproduct2;
+    chi2/=2*(n11+n12);
     return chi2;
   }
 }

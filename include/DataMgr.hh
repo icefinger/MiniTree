@@ -2,8 +2,11 @@
 #define __minitree_datamgr__
 
 #include <map>
+#include <list>
+#include <utility>
 #include <fstream>
 #include <vector>
+#include <fstream>
 
 namespace icedcode
 {
@@ -14,34 +17,34 @@ namespace icedcode
     {
     public:
       RawData () {}
-      RawData () {}
+      ~RawData () {}
 
-      size_t GetAbsolutePosition (const string& aParName) const;
-      size_t GetPositionInEntry (const string& aParName) const;
+      size_t GetAbsolutePosition (const std::string& aParName) const;
+      size_t GetPositionInEntry (const std::string& aParName) const;
       size_t GetNumberOfEntries () const;
       size_t GetNumberOfParameters () const;
-      pair <float,float> GetValueLimitsOfParamater (const string& aParName, size_t aEntryNb) const;
-      pair <float,float> GetValueLimitsOfParamater (size_t aPositionInEntries, size_t aEntryNb) const;
+      std::pair <float,float> GetValueLimitsOfParamater (const std::string& aParName, size_t aEntryNb) const;
+      std::pair <float,float> GetValueLimitsOfParamater (size_t aPositionInEntries, size_t aEntryNb) const;
 
-      float GetValueInEntry (const string& aParName, size_t aEntryNb) const;
+      float GetValueInEntry (const std::string& aParName, size_t aEntryNb) const;
       float GetValueInEntry (size_t aPositionInEntries, size_t aEntryNb) const;
 
-      void SetParameterNames (const vector <string>& aParNameList);
-      void AddEntry (const vector <float>& aValueList);
+      void SetParameterNames (const std::vector <std::string>& aParNameList);
+      void AddEntry (const std::vector <float>& aValueList);
 
-      list <float> GetOrderedParametersValues (size_t aPositionInEntries);
+      std::list <float> GetOrderedParametersValues (size_t aPositionInEntries) const;
 
-      const vector<string>& GetParameterNames () const {return fParametersNames;}
-      const vector<float>& GetParameterValues () const {return fParametersValues;}
-      void GetParameterValuesFromEntry (size_t aEntryNb, vector <float>& aValueList) const;
+      const std::vector<std::string>& GetParameterNames () const {return fParametersNames;}
+      const std::vector<float>& GetParameterValues () const {return fParametersValues;}
+      void GetParameterValuesFromEntry (size_t aEntryNb, std::vector <float>& aValueList) const;
 
     protected:
-      vector <string> fParametersNames;
-      vector <float>  fParametersValues;
-      vector <pair <float, float> fParametersValuesLimits;
+      std::vector <std::string> fParametersNames;
+      std::vector <float>  fParametersValues;
+      std::vector <std::pair <float, float>> fParametersValuesLimits;
 
       size_t fValueEntrySize =1;
-    }
+    };
 
       DataMgr ();
     ~DataMgr ();
@@ -51,8 +54,8 @@ namespace icedcode
      virtual bool ReadData () = 0;
 
   protected:
-    ifstream fInputFstream;
-    RawData fRawData;
+    std::ifstream fInputFstream;
+    RawData fRootRawData;
   };
 
 
