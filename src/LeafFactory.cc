@@ -19,24 +19,43 @@ namespace icedcode
     return fInstance;
   }
 
-  Leaf* LeafFactory::CreateALeaf (const RawData& aRawData)
+  Leaf** LeafFactory::CreateDaugherLeafs (const RawData& aRawData)
   {
-    Leaf* overallBestLeaf = 0;
-    for (size_t it=0 ; it<aRawData.GetNumberOfParameters () ; it++)
+    Leaf** overallBestLeafs = GetParameterBestLeaf (0, aRawData);
+
+    for (size_t it=1 ; it<aRawData.GetNumberOfParameters () ; it++)
       {
-        Leaf* bestLeaf = GetParameterBestLeaf (it, aRawData);
-        if (overallBestLeaf == 0 || overallBestLeaf->GetChi2 () < bestLeaf.GetChi2 ())
+        Leaf** bestLeaf = GetParameterBestLeaf (it, aRawData);
+        if (overallBestLeaf != 0 || overallBestLeaf[0]->GetChi2 () < bestLeaf[0]->GetChi2 ())
           {
-            if (overallBestLeaf == 0)
-              delete overallBestLeaf;
+            delete overallBestLeaf[0];
+            delete overallBestLeaf[1];
+            delete overallBestLeaf;
+
             overallBestLeaf = bestLeaf;
           }
         else
-          delete bestLeaf;
+          {
+            delete bestLeaf[0];
+            delete bestLeaf[1];
+            delete bestLeaf;
+          }
+
       }
+
+    size_t cutParPos = overallBestLeafs[0]->GetCuttedParameterPositon ();
+    float cutParVal  = overallBestLeafs[0]->GetCutValue ();
+
+    DataMgr::RawData LeafRawDatas[2];
+    __GenerateRawData (aRawData, curParPos, cutParVal, LeafRawDatas);
+    overallBestLeafs[0]->SetRawData (LeafRawDatas[0]);
+    overallBestLeafs[1]->SetRawData (LeafRawDatas[1]);
+
+    return overallBestLeafs;
+
   }
 
-  Leaf* LeafFactory::GetParameterBestLeaf (size_t aPositionInEntries, const DataMgr::RawData& aRawData)
+  Leaf** LeafFactory::GetParameterBestLeaf (size_t aPositionInEntries, const DataMgr::RawData& aRawData)
   {
     pair <float, float> limits = aRawData.GetValueLimitsOfParamater (aPositionInEntries);
     list <float> orderedValues=aRawData.GetOrderedParametersValues (aPositionInEntries);
@@ -59,27 +78,53 @@ namespace icedcode
         previous_value = val;
       }
 
-    DataMgr::RawData LeafRawData = aRawData;
-    LeafRawData.RemoveParameter (aPositionInEntries);
-    Leaf* toreturn = new Leaf(LeafRawData);
-    toreturn->SetChi2 (maxchi2);
-    toreturn->SetCut (maxcut);
-    return toreturn;
+    DataMgr::RawData LeafRawData[2];
+    Leaf** toreturn = (Leaf**)(malloc (2*sizeof(Leaf**)));
+    toreturn[0]=new Leaf ();
+    toreturn[1]=new Leaf ();
 
+    toreturn[0]->SetChi2 (maxchi2);
+    toreturn[0]->SetCut (maxcut);
+    toreturn[1]->SetChi2 (maxchi2);
+    toreturn[1]->SetCut (maxcut);
+
+    return toreturn;
   }
 
-  float LeafFactory::__Chi2Calculator  (const DataMgr::RawData aRawData, const string& aParName, float aCutValue)
+  void LeafFactory::__GenerateRawData (const DataMgr::RawData& aRawData, size_t aParPosition, float aCutValue, DataMgr::RawData* newRawDatas)
   {
-    size_t ParPosition = aRawData.GetPosition (aParName);
-    if (aRawData.GetPosition (aParName) == 0xffffffffffffffff)
-      return 0;
+    vector <string> paramNames = aRawData.GetParameterNames ();
+    paramNames.erase (paramNames.begin () + aParPosition);
+    newRawDatas[0].SetParameterNames (paramNames);
+    newRawDatas[1].SetParameterNames (paramNames);
 
+    vector <float> theEntryValues;
+
+    for (size_t it=0 ; it<aRawData.GetNumberOfEntries () ; it++)
+      {
+        aRawData.GetParameterValuesFromEntry(aParPosition, theEntryValues);
+        theEntryValues.erase (theEntryValues.begin ());
+
+        float value = aRawData.GetValueInEntry (aParPosition, it);
+        if (value < aCutValue)
+          {
+            newRawDatas[0].AddEntry (theEntryValues);
+          }
+        else
+          {
+            newRawDatas[1].AddEntry (theEntryValues);
+          }
+      }
+  }
+
+  float LeafFactory::__Chi2Calculator  (const DataMgr::RawData& aRawData, size_t aParPosition, float aCutValue)
+  {
 
     float n11=0;
     float n12=0;
     for (size_t it=0 ; it<aRawData.GetNumberOfEntries () ; it++)
       {
-        float value = aRawData.GetValueInEntry (ParPosition, it);
+        float value = aRawData.GetValueInEntry (aParPosition, it);
         if (value < aCutValue)
           n11+=value;
         else

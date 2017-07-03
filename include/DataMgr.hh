@@ -10,7 +10,6 @@ namespace icedcode
   class DataMgr
   {
   public:
-
     class RawData
     {
     public:
@@ -27,19 +26,25 @@ namespace icedcode
       float GetValueInEntry (const string& aParName, size_t aEntryNb) const;
       float GetValueInEntry (size_t aPositionInEntries, size_t aEntryNb) const;
 
-      void SetParameterName (const vector <string>& aParNameList);
+      void SetParameterNames (const vector <string>& aParNameList);
       void AddEntry (const vector <float>& aValueList);
 
-
       list <float> GetOrderedParametersValues (size_t aPositionInEntries);
+
+      const vector<string>& GetParameterNames () const {return fParametersNames;}
+      const vector<float>& GetParameterValues () const {return fParametersValues;}
+      void GetParameterValuesFromEntry (size_t aEntryNb, vector <float>& aValueList) const;
+
     protected:
       vector <string> fParametersNames;
       vector <float>  fParametersValues;
       vector <pair <float, float> fParametersValuesLimits;
+
+      size_t fValueEntrySize =1;
     }
 
-    DataMgr () {}
-    ~DataMgr () {}
+      DataMgr ();
+    ~DataMgr ();
 
      virtual bool OpenFile (const char* aFile);
      virtual bool CheckFile () = 0;
