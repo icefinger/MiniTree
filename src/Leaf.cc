@@ -2,6 +2,9 @@
 
 namespace icedcode
 {
+  RootLeaf::RootLeaf ()
+  {
+  }
   RootLeaf::RootLeaf (const Tree* aTree, const DataMgr::RawData& aRawData)
   {
     fTree = aTree;

@@ -1,88 +1,107 @@
 [ebrowse-hs "ebrowse 5.0" " -x" () ()][ebrowse-ts [ebrowse-cs "RootLeaf" "icedcode" 0"include/Leaf.hh" "  class RootLeaf
-  {" 137"src/Leaf.cc" ]
-([ebrowse-ts [ebrowse-cs "Leaf" "icedcode" 0"include/Leaf.hh" "  class Leaf:" 425"src/Leaf.cc" ]
-()([ebrowse-ms "fChi2" () 0 () "    float fChi2=-1;" 972 1  () () 0]
-[ebrowse-ms "fCutValue" () 0 () "    float fCutValue;" 952 1  () () 0]
-[ebrowse-ms "fHighDautherLeaf" () 0 () "    const Leaf* fHighDautherLeaf = 0;" 930 1  () () 0]
-[ebrowse-ms "fLowDautherLeaf" () 0 () "    const Leaf* fLowDautherLeaf = 0;" 892 1  () () 0]
-[ebrowse-ms "fMotherLeaf" () 0 () "    const Leaf* fMotherLeaf = 0;" 855 1  () () 0]
+  {" 191"src/Leaf.cc" ]
+([ebrowse-ts [ebrowse-cs "Leaf" "icedcode" 0"include/Leaf.hh" "  class Leaf:" 850"src/Leaf.cc" ]
+()([ebrowse-ms "fChi2" () 0 () "    float fChi2=-1;" 1525 1  () () 0]
+[ebrowse-ms "fCuttedPar" () 0 () "    size_t fCuttedPar=-1;" 1601 1  () () 0]
+[ebrowse-ms "fMotherLeaf" () 0 () "    const Leaf* fMotherLeaf = 0;" 1435 1  () () 0]
+[ebrowse-ms "fMotherLeafCutValue" () 0 () "    float fMotherLeafCutValue;" 1505 1  () () 0]
+[ebrowse-ms "fMotherLeafCuttedParameter" () 0 () "    float fMotherLeafCuttedParameter;" 1474 1  () () 0]
 )
-([ebrowse-ms "GetChi2" () 4 () "    float GetChi2 ()" 786 0  "include/Leaf.hh" "    float GetChi2 ()" 786]
-[ebrowse-ms "GetDaugtherLeafs" () 4 () "    void GetDaugtherLeafs (const" 646 0  () () 0]
-[ebrowse-ms "GetDaugtherLeafs" () 0 () () 0 0  () "  void Leaf::GetDaugtherLeafs (const" 314]
-[ebrowse-ms "GetMotherLeaf" () 4 () "    const Leaf* GetMotherLeaf ()" 585 0  "include/Leaf.hh" "    const Leaf* GetMotherLeaf ()" 585]
-[ebrowse-ms "Leaf" () 0 () "af, const Tree* aTree, const RawData& aRawData);" 471 0  () () 0]
-[ebrowse-ms "Leaf" () 0 () () 0 0  () "therLeaf, Tree *aTree, const RawData& aRawData):" 183]
-[ebrowse-ms "SetDaugtherLeafs" () 0 () "    void SetDaugtherLeafs (const" 725 0  () "  void Leaf::SetDaugtherLeafs (const" 461]
-[ebrowse-ms "~Leaf" () 0 () "    ~Leaf ()" 548 0  "include/Leaf.hh" "    ~Leaf ()" 548]
+([ebrowse-ms "GetChi2" () 4 () "    float GetChi2 ()" 1127 0  "include/Leaf.hh" "    float GetChi2 ()" 1127]
+[ebrowse-ms "GetCutValue" () 4 () "    float GetCutValue ()" 1222 0  "include/Leaf.hh" "    float GetCutValue ()" 1222]
+[ebrowse-ms "GetCuttedParameterPositon" () 0 () "    size_t GetCuttedParameterPositon ()" 1284 0  "include/Leaf.hh" "    size_t GetCuttedParameterPositon ()" 1284]
+[ebrowse-ms "GetMotherLeaf" () 4 () "    const Leaf* GetMotherLeaf ()" 1032 0  "include/Leaf.hh" "    const Leaf* GetMotherLeaf ()" 1032]
+[ebrowse-ms "Leaf" () 0 () "    Leaf ();" 981 0  () "  Leaf::Leaf () {" 668]
+[ebrowse-ms "Leaf" () 0 () " Tree* aTree, const DataMgr::RawData& aRawData);" 896 0  () " Tree *aTree, const DataMgr::RawData& aRawData):" 513]
+[ebrowse-ms "SetChi2" () 0 () "    void SetChi2 (float" 1084 0  "include/Leaf.hh" "    void SetChi2 (float" 1084]
+[ebrowse-ms "SetCutValue" () 0 () "    void SetCutValue (float" 1178 0  "include/Leaf.hh" "    void SetCutValue (float" 1178]
+[ebrowse-ms "SetCuttedParameterPosition" () 0 () "    void SetCuttedParameterPosition (size_t" 1349 0  "include/Leaf.hh" "    void SetCuttedParameterPosition (size_t" 1349]
+[ebrowse-ms "min" () 0 () "    float fCut=std::numeric_limits<float>::min()" 1574 1  () () 0]
+[ebrowse-ms "~Leaf" () 0 () "    ~Leaf ()" 995 0  "include/Leaf.hh" "    ~Leaf ()" 995]
 )
 ()
 ()
 ()
 ()
 ()()
-])([ebrowse-ms "fLeafRemainingData" () 0 () "    RawData fLeafRemainingData;" 405 1  () () 0]
-[ebrowse-ms "fTree" () 0 () "    const Tree* fTree;" 373 1  () () 0]
+])([ebrowse-ms "fHighDautherLeaf" () 0 () "    const Leaf* fHighDautherLeaf = 0;" 829 1  () () 0]
+[ebrowse-ms "fLeafRemainingData" () 0 () "    DataMgr::RawData fLeafRemainingData;" 753 1  () () 0]
+[ebrowse-ms "fLowDautherLeaf" () 0 () "    const Leaf* fLowDautherLeaf = 0;" 791 1  () () 0]
+[ebrowse-ms "fTree" () 0 () "    const Tree* fTree;" 712 1  () () 0]
 )
-([ebrowse-ms "GetRawData" () 4 () "    const RawData& GetRawData ()" 301 0  "include/Leaf.hh" "    const RawData& GetRawData ()" 301]
-[ebrowse-ms "GetTree" () 4 () "    const Tree* GetTree ()" 246 0  "include/Leaf.hh" "    const Tree* GetTree ()" 246]
-[ebrowse-ms "Leaf" () 0 () "    Leaf (const" 163 0  () () 0]
-[ebrowse-ms "RootLeaf" () 0 () () 0 0  () "tLeaf (Tree* aTree, const RawData& aRawData)
-  {" 67]
-[ebrowse-ms "~Leaf" () 0 () "    ~Leaf ()" 215 0  "include/Leaf.hh" "    ~Leaf ()" 215]
+([ebrowse-ms "GetDaugtherLeafs" () 4 () "    void GetDaugtherLeafs (const" 554 0  () "  void RootLeaf::GetDaugtherLeafs (const" 219]
+[ebrowse-ms "GetRawData" () 4 () "    const DataMgr::RawData& GetRawData ()" 398 0  "include/Leaf.hh" "    const DataMgr::RawData& GetRawData ()" 398]
+[ebrowse-ms "GetTree" () 4 () "    const Tree* GetTree ()" 334 0  "include/Leaf.hh" "    const Tree* GetTree ()" 334]
+[ebrowse-ms "RootLeaf" () 0 () "    RootLeaf ();" 217 0  () () 0]
+[ebrowse-ms "RootLeaf" () 0 () " Tree* aTree, const DataMgr::RawData& aRawData);" 238 0  () "ee* aTree, const DataMgr::RawData& aRawData)
+  {" 68]
+[ebrowse-ms "SetDaugtherLeafs" () 0 () "    void SetDaugtherLeafs (const" 635 0  () "  void RootLeaf::SetDaugtherLeafs (const" 378]
+[ebrowse-ms "SetRawData" () 0 () "    void SetRawData (const" 461 0  "include/Leaf.hh" "    void SetRawData (const" 461]
+[ebrowse-ms "~RootLeaf" () 0 () "    ~RootLeaf ()" 303 0  "include/Leaf.hh" "    ~RootLeaf ()" 303]
 )
+()
+()
+()
+()
+()()
+][ebrowse-ts [ebrowse-cs "std" "icedcode" 0() () 0() ]
+()()
+()
 ()
 ()
 ()
 ()
 ()()
 ][ebrowse-ts [ebrowse-cs "DataMgr" "icedcode" 0"include/DataMgr.hh" "  class DataMgr
-  {" 152"src/DataMgr.cc" ]
-([ebrowse-ts [ebrowse-cs "BasicDataMgr" "icedcode" 0"include/BasicDataMgr.hh" "   class BasicDataMgr:" 134"src/BasicDataMgr.cc" ]
+  {" 206"src/DataMgr.cc" ]
+([ebrowse-ts [ebrowse-cs "BasicDataMgr" "icedcode" 0"include/BasicDataMgr.hh" "  class BasicDataMgr:" 133"src/BasicDataMgr.cc" ]
 ()()
-([ebrowse-ms "BasicDataMgr" () 0 () "    BasicDataMgr () {" 206 0  "include/BasicDataMgr.hh" "    BasicDataMgr () {" 206]
-[ebrowse-ms "CheckFile" () 1 () "    virtual bool CheckFile ()" 240 0  "include/BasicDataMgr.hh" "    virtual bool CheckFile ()" 240]
-[ebrowse-ms "ReadData" () 1 () "    virtual bool ReadData ()" 304 0  () "  bool BasicDataMgr::ReadData ()" 134]
-)
-()
-()
-()
-()
-()()
-])([ebrowse-ms "fInputFstream" () 0 () "    ifstream fInputFstream;" 1621 1  () () 0]
-[ebrowse-ms "fRawData" () 0 () "    RawData fRawData;" 1643 1  () () 0]
-)
-([ebrowse-ms "CheckFile" () 9 () "     virtual bool CheckFile ()" 1539 0  () () 0]
-[ebrowse-ms "DataMgr" () 0 () "      DataMgr ();" 1441 0  () "  DataMgr::DataMgr () {" 66]
-[ebrowse-ms "OpenFile" () 1 () "     virtual bool OpenFile (const" 1494 0  () "  bool DataMgr::OpenFile (const" 128]
-[ebrowse-ms "ReadData" () 9 () "     virtual bool ReadData ()" 1574 0  () () 0]
-[ebrowse-ms "~DataMgr" () 0 () "    ~DataMgr ()" 1458 0  () "  DataMgr::~DataMgr ()" 92]
+([ebrowse-ms "BasicDataMgr" () 0 () "    BasicDataMgr ();" 182 0  () "  BasicDataMgr::BasicDataMgr () {" 102]
+[ebrowse-ms "CheckFile" () 1 () "    virtual bool CheckFile ()" 236 0  "include/BasicDataMgr.hh" "    virtual bool CheckFile ()" 236]
+[ebrowse-ms "ReadData" () 1 () "    virtual bool ReadData ()" 300 0  () "  bool BasicDataMgr::ReadData ()" 206]
+[ebrowse-ms "~BasicDataMgr" () 0 () "    ~BasicDataMgr ()" 204 0  () "  BasicDataMgr::~BasicDataMgr ()" 138]
 )
 ()
 ()
 ()
 ()
 ()()
-][ebrowse-ts [ebrowse-cs "RawData" "icedcode::DataMgr" 0"include/DataMgr.hh" "    {" 187"src/DataMgr.cc" ]
-()([ebrowse-ms "fParametersNames" () 0 () "      vector <string> fParametersNames;" 1317 1  () () 0]
-[ebrowse-ms "fParametersValues" () 0 () "      vector <float>  fParametersValues;" 1358 1  () () 0]
-[ebrowse-ms "fParametersValuesLimits" () 0 () "or <pair <float, float> fParametersValuesLimits;" 1417 1  () () 0]
+])([ebrowse-ms "fInputFstream" () 0 () "    std::ifstream fInputFstream;" 1832 1  () () 0]
+[ebrowse-ms "fRootRawData" () 0 () "    RawData fRootRawData;" 1858 1  () () 0]
 )
-([ebrowse-ms "AddEntry" () 0 () "      void AddEntry (const" 912 0  () () 0]
-[ebrowse-ms "GetAbsolutePosition" () 4 () "      size_t GetAbsolutePosition (const" 280 0  () () 0]
-[ebrowse-ms "GetNumberOfEntries" () 4 () "      size_t GetNumberOfEntries ()" 404 0  () () 0]
-[ebrowse-ms "GetNumberOfParameters" () 4 () "      size_t GetNumberOfParameters ()" 449 0  () () 0]
-[ebrowse-ms "GetOrderedParametersValues" () 0 () " list <float> GetOrderedParametersValues (size_t" 996 0  () "Mgr::RawData::GetOrderedParametersValues (size_t" 288]
-[ebrowse-ms "GetParameterNames" () 4 () "      const vector<string> GetParameterNames ()" 1066 0  "include/DataMgr.hh" "      const vector<string> GetParameterNames ()" 1066]
-[ebrowse-ms "GetParameterValues" () 4 () "      const vector<float> GetParameterValues ()" 1147 0  "include/DataMgr.hh" "      const vector<float> GetParameterValues ()" 1147]
-[ebrowse-ms "GetParameterValuesFromEntry" () 4 () "ctor <float> GetParameterValuesFromEntry (size_t" 1244 0  () () 0]
-[ebrowse-ms "GetPositionInEntry" () 4 () "      size_t GetPositionInEntry (const" 344 0  () () 0]
-[ebrowse-ms "GetValueInEntry" () 4 () "      float GetValueInEntry (size_t" 773 0  () () 0]
-[ebrowse-ms "GetValueInEntry" () 4 () "      float GetValueInEntry (const" 695 0  () () 0]
-[ebrowse-ms "GetValueLimitsOfParamater" () 4 () " <float,float> GetValueLimitsOfParamater (size_t" 615 0  () () 0]
-[ebrowse-ms "GetValueLimitsOfParamater" () 4 () "r <float,float> GetValueLimitsOfParamater (const" 514 0  () () 0]
-[ebrowse-ms "RawData" () 0 () "      RawData () {" 236 0  "include/DataMgr.hh" "      RawData () {" 236]
-[ebrowse-ms "SetParameterName" () 0 () "      void SetParameterName (const" 853 0  () () 0]
+([ebrowse-ms "CheckFile" () 9 () "     virtual bool CheckFile ()" 1745 0  () () 0]
+[ebrowse-ms "DataMgr" () 0 () "      DataMgr ();" 1647 0  () "  DataMgr::DataMgr () {" 107]
+[ebrowse-ms "OpenFile" () 1 () "     virtual bool OpenFile (const" 1700 0  () "  bool DataMgr::OpenFile (const" 169]
+[ebrowse-ms "ReadData" () 9 () "     virtual bool ReadData ()" 1780 0  () () 0]
+[ebrowse-ms "~DataMgr" () 0 () "    ~DataMgr ()" 1664 0  () "  DataMgr::~DataMgr ()" 133]
+)
+()
+()
+()
+()
+()()
+][ebrowse-ts [ebrowse-cs "RawData" "icedcode::DataMgr" 0"include/DataMgr.hh" "    {" 240"src/DataMgr.cc" ]
+()([ebrowse-ms "fParametersNames" () 0 () "     std::vector <std::string> fParametersNames;" 1472 1  () () 0]
+[ebrowse-ms "fParametersValues" () 0 () "      std::vector <float>  fParametersValues;" 1518 1  () () 0]
+[ebrowse-ms "fParametersValuesLimits" () 0 () "d::pair <float, float>> fParametersValuesLimits;" 1588 1  () () 0]
+[ebrowse-ms "fValueEntrySize" () 0 () "      size_t fValueEntrySize =1;" 1622 1  () () 0]
+)
+([ebrowse-ms "AddEntry" () 0 () "      void AddEntry (const" 1007 0  () () 0]
+[ebrowse-ms "GetAbsolutePosition" () 4 () "      size_t GetAbsolutePosition (const" 334 0  () () 0]
+[ebrowse-ms "GetNumberOfEntries" () 4 () "      size_t GetNumberOfEntries ()" 468 0  () () 0]
+[ebrowse-ms "GetNumberOfParameters" () 4 () "      size_t GetNumberOfParameters ()" 513 0  () () 0]
+[ebrowse-ms "GetOrderedParametersValues" () 4 () ":list <float> GetOrderedParametersValues (size_t" 1101 0  () "Mgr::RawData::GetOrderedParametersValues (size_t" 654]
+[ebrowse-ms "GetParameterNames" () 4 () "t std::vector<std::string>& GetParameterNames ()" 1188 0  "include/DataMgr.hh" "t std::vector<std::string>& GetParameterNames ()" 1188]
+[ebrowse-ms "GetParameterValues" () 4 () " const std::vector<float>& GetParameterValues ()" 1275 0  "include/DataMgr.hh" " const std::vector<float>& GetParameterValues ()" 1275]
+[ebrowse-ms "GetParameterValuesFromEntry" () 4 () "      void GetParameterValuesFromEntry (size_t" 1356 0  () "gr::RawData::GetParameterValuesFromEntry (size_t" 321]
+[ebrowse-ms "GetPositionInEntry" () 4 () "      size_t GetPositionInEntry (const" 403 0  () () 0]
+[ebrowse-ms "GetValueInEntry" () 4 () "      float GetValueInEntry (size_t" 857 0  () () 0]
+[ebrowse-ms "GetValueInEntry" () 4 () "      float GetValueInEntry (const" 774 0  () () 0]
+[ebrowse-ms "GetValueLimitsOfParamater" () 4 () " <float,float> GetValueLimitsOfParamater (size_t" 694 0  () () 0]
+[ebrowse-ms "GetValueLimitsOfParamater" () 4 () "r <float,float> GetValueLimitsOfParamater (const" 583 0  () () 0]
+[ebrowse-ms "RawData" () 0 () "      RawData () {" 269 0  "include/DataMgr.hh" "      RawData () {" 269]
+[ebrowse-ms "SetParameterNames" () 0 () "      void SetParameterNames (const" 938 0  () () 0]
+[ebrowse-ms "~RawData" () 0 () "      ~RawData ()" 290 0  "include/DataMgr.hh" "      ~RawData ()" 290]
 )
 ()
 ()
@@ -91,26 +110,25 @@
 ()()
 ][ebrowse-ts [ebrowse-cs "LeafFactory" "icedcode" 0"include/LeafFactory.hh" "  class LeafFactory
   {" 131"src/LeafFactory.cc" ]
-()([ebrowse-ms "fInstance" () 0 () () 0 0  () "  LeafFactory* LeafFactory::fInstance = 0;" 90]
+()([ebrowse-ms "fInstance" () 0 () () 0 0  () "  LeafFactory* LeafFactory::fInstance = 0;" 167]
 )
-([ebrowse-ms "CreateALeaf" () 0 () () 0 0  () "  Leaf* LeafFactory::CreateALeaf (const" 333]
-[ebrowse-ms "GetIt" () 0 () "    LeafFactory* GetIt ()" 167 0  () "  LeafFactory* LeafFactory::GetIt ()" 207]
-[ebrowse-ms "GetParameterBestLeaf" () 0 () () 0 0  () " Leaf* LeafFactory::GetParameterBestLeaf (size_t" 855]
-[ebrowse-ms "LeafFactory" () 0 () "    LeafFactory ();" 199 2  () "  LeafFactory::LeafFactory ()
-  {" 121]
-[ebrowse-ms "__Chi2Calculator" () 0 () "    float __Chi2Calculator (const" 256 2  () () 0]
-[ebrowse-ms "__Chi2Calculator" () 0 () () 0 0  () "  float LeafFactory::__Chi2Calculator  (const" 2347]
-[ebrowse-ms "__GenerateRawData" () 0 () () 0 0  () "  void LeafFactory::__GenerateRawData (const" 1914]
-[ebrowse-ms "~LeafFactory" () 0 () "    ~LeafFactory ()" 220 2  () "  LeafFactory::~LeafFactory ()" 161]
+([ebrowse-ms "CreateDaugherLeafs" () 0 () "    Leaf** CreateDaugherLeafs (const" 206 0  () "  Leaf** LeafFactory::CreateDaugherLeafs (const" 418]
+[ebrowse-ms "GetIt" () 0 () "    LeafFactory* GetIt ()" 167 0  () "  LeafFactory* LeafFactory::GetIt ()" 284]
+[ebrowse-ms "GetParameterBestLeaf" () 0 () "    Leaf** GetParameterBestLeaf (size_t" 275 0  () "Leaf** LeafFactory::GetParameterBestLeaf (size_t" 1515]
+[ebrowse-ms "LeafFactory" () 0 () "    LeafFactory ();" 361 2  () "  LeafFactory::LeafFactory ()
+  {" 198]
+[ebrowse-ms "__Chi2Calculator" () 0 () "    float __Chi2Calculator (const" 550 2  () "  float LeafFactory::__Chi2Calculator  (const" 3482]
+[ebrowse-ms "__GenerateRawData" () 0 () "    void __GenerateRawData (const" 418 2  () "  void LeafFactory::__GenerateRawData (const" 2587]
+[ebrowse-ms "~LeafFactory" () 0 () "    ~LeafFactory ()" 382 2  () "  LeafFactory::~LeafFactory ()" 238]
 )
-([ebrowse-ms "fInstance" () 0 () "    static LeafFactory* fInstance;" 337 2  () () 0]
+([ebrowse-ms "fInstance" () 0 () "    static LeafFactory* fInstance;" 659 2  () () 0]
 )
 ()
 ()
 ()
 ()()
 ][ebrowse-ts [ebrowse-cs "*Globals*" () 0() () 0"src/BasicDataMgr.cc" ]
-()([ebrowse-ms "std" () 0 () () 0 0  () "using namespace std;" 48]
+()([ebrowse-ms "std" () 0 () () 0 0  "src/LeafFactory.cc" "using namespace std;" 102]
 )
 ()
 ()
