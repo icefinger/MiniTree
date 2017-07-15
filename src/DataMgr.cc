@@ -1,6 +1,8 @@
 #include <DataMgr.hh>
+
 #include <cstring>
 #include <limits>
+#include <iostream>
 
 using namespace std;
 
@@ -77,6 +79,19 @@ namespace icedcode
   void DataMgr::RawData::AddEntry (const vector <float>& aValueList)
   {
     fParametersValues.insert (fParametersValues.end (), aValueList.begin (), aValueList.end ());
+  }
+
+  void DataMgr::RawData::Dump () const
+  {
+    for (const auto& sit: fParametersNames)
+      cout << sit <<" ";
+    int counter=0;
+    for (auto fit: fParametersValues) {
+      if (counter++ % GetNumberOfParameters () == 0)
+        cout << endl;
+      cout << fit << " ";
+    }
+    cout << endl;
   }
 
 }

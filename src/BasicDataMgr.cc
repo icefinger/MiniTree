@@ -25,6 +25,7 @@ namespace icedcode
       {
         ParametersNames.push_back (paramname);
       }
+    //adding the title for the result of each line
     ParametersNames.push_back ("outcome");
 
     fRootRawData.SetParameterNames (ParametersNames);
@@ -34,6 +35,7 @@ namespace icedcode
     vector <float> Entry;
     while (fInputFstream >> tmp)
       {
+        Entry.push_back (tmp);
         if (Entry.size () % fRootRawData.GetNumberOfParameters () == 0)
           {
             fRootRawData.AddEntry (Entry);

@@ -38,6 +38,8 @@ namespace icedcode
       const std::vector<float>& GetParameterValues () const {return fParametersValues;}
       void GetParameterValuesFromEntry (size_t aEntryNb, std::vector <float>& aValueList) const;
 
+      virtual void Dump () const;
+
     protected:
       std::vector <std::string> fParametersNames;
       std::vector <float>  fParametersValues;
@@ -46,13 +48,14 @@ namespace icedcode
       size_t fValueEntrySize =1;
     };
 
-      DataMgr ();
+    DataMgr ();
     ~DataMgr ();
 
-     virtual bool OpenFile (const char* aFile);
-     virtual bool CheckFile () = 0;
-     virtual bool ReadData () = 0;
+    virtual bool OpenFile (const char* aFile);
+    virtual bool CheckFile () = 0;
+    virtual bool ReadData () = 0;
 
+    virtual void Dump () const {fRootRawData.Dump ();}
   protected:
     std::ifstream fInputFstream;
     RawData fRootRawData;
