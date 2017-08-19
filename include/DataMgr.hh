@@ -44,8 +44,6 @@ namespace icedcode
       std::vector <std::string> fParametersNames;
       std::vector <float>  fParametersValues;
       std::vector <std::pair <float, float>> fParametersValuesLimits;
-
-      size_t fValueEntrySize =1;
     };
 
     DataMgr ();
@@ -54,6 +52,8 @@ namespace icedcode
     virtual bool OpenFile (const char* aFile);
     virtual bool CheckFile () = 0;
     virtual bool ReadData () = 0;
+
+    virtual const RawData GetRootRawData () const {return fRootRawData;}
 
     virtual void Dump () const {fRootRawData.Dump ();}
   protected:

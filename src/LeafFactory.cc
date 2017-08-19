@@ -3,6 +3,7 @@
 #include <utility>
 #include <string>
 #include <cmath>
+#include <iostream>
 
 using namespace std;
 
@@ -37,7 +38,6 @@ namespace icedcode
             delete overallBestLeafs[0];
             delete overallBestLeafs[1];
             delete overallBestLeafs;
-
             overallBestLeafs = bestLeaf;
           }
         else
@@ -52,10 +52,12 @@ namespace icedcode
     size_t cutParPos = overallBestLeafs[0]->GetCuttedParameterPositon ();
     float cutParVal  = overallBestLeafs[0]->GetCutValue ();
 
-    DataMgr::RawData LeafRawDatas[2];
-    __GenerateRawData (aRawData, cutParPos, cutParVal, LeafRawDatas);
-    overallBestLeafs[0]->SetRawData (LeafRawDatas[0]);
-    overallBestLeafs[1]->SetRawData (LeafRawDatas[1]);
+    cout << "oucha" << endl;
+    DataMgr::RawData** LeafRawDatas = __GenerateRawData (aRawData, cutParPos, cutParVal);
+    //LeafRawDatas[0]->Dump ();
+    cout << "ouch" << endl;
+    overallBestLeafs[0]->SetRawData (*LeafRawDatas[0]);
+    overallBestLeafs[1]->SetRawData (*LeafRawDatas[1]);
 
     return overallBestLeafs;
 
@@ -72,7 +74,10 @@ namespace icedcode
     for (auto val: orderedValues)
       {
         if (previous_value == std::numeric_limits<float>::min())
-          continue;
+          {
+            previous_value = val;
+            continue;
+          }
         cut = (val-previous_value)/2;
         chi2=__Chi2Calculator (aRawData, aPositionInEntries, cut);
         if (chi2 > maxcut)
@@ -88,6 +93,8 @@ namespace icedcode
     toreturn[0]=new Leaf ();
     toreturn[1]=new Leaf ();
 
+    toreturn[0]->SetCuttedParameterPosition (aPositionInEntries);
+    toreturn[0]->SetCuttedParameterPosition (aPositionInEntries);
     toreturn[0]->SetChi2 (maxchi2);
     toreturn[0]->SetCutValue (maxcut);
     toreturn[1]->SetChi2 (maxchi2);
@@ -96,30 +103,43 @@ namespace icedcode
     return toreturn;
   }
 
-  void LeafFactory::__GenerateRawData (const DataMgr::RawData& aRawData, size_t aParPosition, float aCutValue, DataMgr::RawData* newRawDatas)
+  DataMgr::RawData** LeafFactory::__GenerateRawData (const DataMgr::RawData& aRawData, size_t aMotherParPosition, float aCutValue)
   {
+    DataMgr::RawData** newRawDatas = (DataMgr::RawData**)(malloc (2*sizeof(DataMgr::RawData**)));
+    newRawDatas[0] = new DataMgr::RawData;
+    newRawDatas[1] = new DataMgr::RawData;
     vector <string> paramNames = aRawData.GetParameterNames ();
-    paramNames.erase (paramNames.begin () + aParPosition);
-    newRawDatas[0].SetParameterNames (paramNames);
-    newRawDatas[1].SetParameterNames (paramNames);
+    paramNames.erase (paramNames.begin () + aMotherParPosition-1);
+
+    newRawDatas[0]->SetParameterNames (paramNames);
+    newRawDatas[1]->SetParameterNames (paramNames);
 
     vector <float> theEntryValues;
 
     for (size_t it=0 ; it<aRawData.GetNumberOfEntries () ; it++)
       {
-        aRawData.GetParameterValuesFromEntry(aParPosition, theEntryValues);
-        theEntryValues.erase (theEntryValues.begin ());
+    cout << "gnagan" << endl;
 
-        float value = aRawData.GetValueInEntry (aParPosition, it);
+    aRawData.GetParameterValuesFromEntry(it, theEntryValues);
+    cout << aMotherParPosition << "-"<<theEntryValues.size () << endl;
+
+    theEntryValues.erase (theEntryValues.begin () + aMotherParPosition-1);
+    cout << "gnagan" << endl;
+
+        float value = aRawData.GetValueInEntry (aMotherParPosition, it);
         if (value < aCutValue)
           {
-            newRawDatas[0].AddEntry (theEntryValues);
+            newRawDatas[0]->AddEntry (theEntryValues);
           }
         else
           {
-            newRawDatas[1].AddEntry (theEntryValues);
+            newRawDatas[1]->AddEntry (theEntryValues);
           }
+    cout << "gnagan bof" << endl;
+
       }
+
+    return newRawDatas;
   }
 
   float LeafFactory::__Chi2Calculator  (const DataMgr::RawData& aRawData, size_t aParPosition, float aCutValue)

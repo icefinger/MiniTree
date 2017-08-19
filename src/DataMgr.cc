@@ -39,9 +39,9 @@ namespace icedcode
   void DataMgr::RawData::GetParameterValuesFromEntry (size_t aEntryNb, vector <float>& aValueList) const
   {
     aValueList.clear ();
-    aValueList.resize (fValueEntrySize);
-    size_t position = aEntryNb*(fValueEntrySize-1);
-    memcpy(&(aValueList[0]), &(fParametersValues[position]), fValueEntrySize*sizeof (float));
+    size_t position = aEntryNb*(GetNumberOfParameters ());
+    auto iter = fParametersValues.begin () + position;
+    aValueList.assign (iter, iter+GetNumberOfParameters());
   }
 
   list <float> DataMgr::RawData::GetOrderedParametersValues (size_t aPositionInEntries) const
