@@ -48,8 +48,11 @@ namespace icedcode
     void SetCutValue (float aCut) {fCut=aCut;}
     float GetCutValue () const {return fCut;}
 
-    size_t GetCuttedParameterPositon () {return fCuttedPar;}
+    size_t GetCuttedParameterPosition () {return fCuttedPar;}
     void SetCuttedParameterPosition (size_t aCuttedPar) {fCuttedPar = aCuttedPar;}
+
+    const std::string& GetCuttedParameterName () {return fCuttedName;}
+    void SetCuttedParameterName   (const std::string& aCuttedName) {fCuttedName = aCuttedName;}
 
   protected:
     const Leaf* fMotherLeaf = 0;
@@ -59,6 +62,7 @@ namespace icedcode
     float fChi2=-1;
     float fCut=std::numeric_limits<float>::min();
     size_t fCuttedPar=-1;
+    std::string fCuttedName;
   };
 
 }

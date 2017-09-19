@@ -50,6 +50,7 @@ namespace icedcode
     ~DataMgr ();
 
     virtual bool OpenFile (const char* aFile);
+    virtual bool FileIsOpen () {return fInputFstream.is_open ();}
     virtual bool CheckFile () = 0;
     virtual bool ReadData () = 0;
 

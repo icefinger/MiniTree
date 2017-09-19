@@ -28,9 +28,13 @@ namespace icedcode
 
   Leaf** LeafFactory::CreateDaugherLeafs (const DataMgr::RawData& aRawData)
   {
+
+    if (aRawData.GetNumberOfParameters () <= fMinimumNumberOfParameters)
+      return 0;
+
     Leaf** overallBestLeafs = GetParameterBestLeaf (0, aRawData);
 
-    for (size_t it=1 ; it<aRawData.GetNumberOfParameters () ; it++)
+    for (size_t it=1 ; it<aRawData.GetNumberOfParameters ()-1 ; it++)
       {
         Leaf** bestLeaf = GetParameterBestLeaf (it, aRawData);
         if (overallBestLeafs != 0 || overallBestLeafs[0]->GetChi2 () < bestLeaf[0]->GetChi2 ())
@@ -48,14 +52,18 @@ namespace icedcode
           }
 
       }
+    if (overallBestLeafs[0]->GetChi2() < fMinimumChi2)
+      {
+        delete overallBestLeafs[0];
+        delete overallBestLeafs[1];
+        delete overallBestLeafs;
+        return 0;
+      }
 
-    size_t cutParPos = overallBestLeafs[0]->GetCuttedParameterPositon ();
+    size_t cutParPos = overallBestLeafs[0]->GetCuttedParameterPosition ();
     float cutParVal  = overallBestLeafs[0]->GetCutValue ();
 
-    cout << "oucha" << endl;
     DataMgr::RawData** LeafRawDatas = __GenerateRawData (aRawData, cutParPos, cutParVal);
-    //LeafRawDatas[0]->Dump ();
-    cout << "ouch" << endl;
     overallBestLeafs[0]->SetRawData (*LeafRawDatas[0]);
     overallBestLeafs[1]->SetRawData (*LeafRawDatas[1]);
 
@@ -88,17 +96,15 @@ namespace icedcode
         previous_value = val;
       }
 
-    DataMgr::RawData LeafRawData[2];
     Leaf** toreturn = (Leaf**)(malloc (2*sizeof(Leaf**)));
     toreturn[0]=new Leaf ();
-    toreturn[1]=new Leaf ();
 
     toreturn[0]->SetCuttedParameterPosition (aPositionInEntries);
-    toreturn[0]->SetCuttedParameterPosition (aPositionInEntries);
+    toreturn[0]->SetCuttedParameterName (aRawData.GetParameterNames()[aPositionInEntries]);
     toreturn[0]->SetChi2 (maxchi2);
     toreturn[0]->SetCutValue (maxcut);
-    toreturn[1]->SetChi2 (maxchi2);
-    toreturn[1]->SetCutValue (maxcut);
+    toreturn[1]=new Leaf (*toreturn[0]);
+
 
     return toreturn;
   }
@@ -109,7 +115,7 @@ namespace icedcode
     newRawDatas[0] = new DataMgr::RawData;
     newRawDatas[1] = new DataMgr::RawData;
     vector <string> paramNames = aRawData.GetParameterNames ();
-    paramNames.erase (paramNames.begin () + aMotherParPosition-1);
+    paramNames.erase (paramNames.begin () + aMotherParPosition);
 
     newRawDatas[0]->SetParameterNames (paramNames);
     newRawDatas[1]->SetParameterNames (paramNames);
@@ -118,13 +124,9 @@ namespace icedcode
 
     for (size_t it=0 ; it<aRawData.GetNumberOfEntries () ; it++)
       {
-    cout << "gnagan" << endl;
-
     aRawData.GetParameterValuesFromEntry(it, theEntryValues);
-    cout << aMotherParPosition << "-"<<theEntryValues.size () << endl;
 
-    theEntryValues.erase (theEntryValues.begin () + aMotherParPosition-1);
-    cout << "gnagan" << endl;
+    theEntryValues.erase (theEntryValues.begin () + aMotherParPosition);
 
         float value = aRawData.GetValueInEntry (aMotherParPosition, it);
         if (value < aCutValue)
@@ -135,8 +137,6 @@ namespace icedcode
           {
             newRawDatas[1]->AddEntry (theEntryValues);
           }
-    cout << "gnagan bof" << endl;
-
       }
 
     return newRawDatas;
